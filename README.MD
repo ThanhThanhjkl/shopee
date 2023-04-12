@@ -43,3 +43,13 @@ Use the cmd line to clone repo to your computer
 git clone [github_repo_url]
 ```
 Open `index.html` to run the application
+
+
+
+<?php
+$connect = mysqli_connect('sql308.epizy.com','epiz_33982477', 'MMew22GvRxz','epiz_33982477_shoppedb');
+if ($connect) {
+    mysqli_query($connect, "SET NAMES 'UTF8'");
+} else {
+}
+?>
