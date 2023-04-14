@@ -1,5 +1,7 @@
 <?php
 $id = $_GET['id'];
+$sql = "SELECT * FROM products where prd_id = $id";
+$query = mysqli_query($connect, $sql);
 ?>
 
 <head>
@@ -24,6 +26,11 @@ $id = $_GET['id'];
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
 </head>
 
@@ -304,192 +311,219 @@ $id = $_GET['id'];
 
                     <!-- Cart layout -->
                     <div class="header__cart">
-                        <div class="header__cart-wrap">
+                        <a href="https://shopee.vn/cart" class="header__cart-wrap">
                             <i class="header__cart-icon fas fa-shopping-cart"></i>
-                            <!-- No cart : header__cart-list--no-cart -->
-                            <div class="header__cart-list ">
-                                <!-- Nocart -->
-                                <img src="./assets/img/no-cart.png" alt="No Cart" class="header__cart-no-cart-img" />
-                                <span class="header__cart-list-no-cart-msg">
-                                    Chưa có sản phẩm
-                                </span>
-                                <!-- Hascart -->
-                                <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                                <!-- Cart item -->
-                                <ul class="header__cart-list-item">
-                                    <li class="header__cart-item">
-                                        <img src="./assets/img/li xi.jpg" alt="" class="header__cart-img" />
-                                        <div class="header__cart-item-info">
-                                            <div class="header__cart-item-head">
-                                                <h5 class="header__cart-item-name">
-                                                    Set dĩa nhôm 7075 39T cho Raider FI dĩa nhôm 7075
-                                                    39T cho Raider FI
-                                                    dĩa nhôm 7075 39T cho Raider FI
-                                                </h5>
-                                                <div class="header__cart-item-price-wrap">
-                                                    <span class="header__cart-item-price">2.000.000đ</span>
-                                                    <span class="header__cart-item-multiply">x</span>
-                                                    <span class="header__cart-item-qnt">2</span>
-                                                </div>
-                                            </div>
-                                            <div class="header__cart-item-body">
-                                                <span class="header__cart-item-description">Phân loại
-                                                    : Bạc</span>
-                                                <span class="header__cart-item-remove">Xóa</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <a href="#" class="header__cart-view-cart btn btn--primary">Xem
-                                    giỏ hàng</a>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </header>
         <div class="app__container">
-            <div class="grid wide">
-                <div class="row sm-gutter">
-                    <!-- Category -->
-                    <div class="col">
-                        <nav class="category categoryed">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
-                                    </li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img class="d-block w-100" src="./assets/img/hop1.jpg" alt="First slide">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100" src="./assets/img/hop2.jpg" alt="Second slide">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100" src="./assets/img/hop3.jpg" alt="Third slide">
-                                    </div>
-                                </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                                    data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                                    data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                            <div class="infomation">
-                                <h4>Bao Nạp Tài Mùa Cưới cao cấp, họa tiết in nổi sắc nét, cao cấp</h4>
-                                <div class="feeted">
-                                    <div class="vote">
-                                        <a class="rate" href="">4.9</a>
-                                        <div class="home-product-item__rating unscale">
-                                            <i class="home-product-item__star--gold fas fa-star"></i>
-                                            <i class="home-product-item__star--gold fas fa-star"></i>
-                                            <i class="home-product-item__star--gold fas fa-star"></i>
-                                            <i class="home-product-item__star--gold fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
+            <?php
+            while ($row = mysqli_fetch_assoc($query)) { ?>
+                <div class="grid wide">
+                    <div class="row sm-gutter">
+                        <!-- Category -->
+                        <div class="col">
+                            <nav class="category categoryed">
+                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" src="<?php echo $row['image']; ?>" alt="First slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="<?php echo $row['image1']; ?>"
+                                                alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="<?php echo $row['image2']; ?>"
+                                                alt="Third slide">
                                         </div>
                                     </div>
-                                    <div class="vote second">
-                                        <a class="rate black" href="">579</a>
-                                        <p class="remake">Đánh Giá</p>
-                                    </div>
-                                    <div class="vote last">
-                                        <a class="rate black undecoration" href="">2000</a>
-                                        <p class="remake">Đã bán</p>
-                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
-                                <div class="price">
-                                    <div class="old_price home-product-item__price">
-                                        <span class="home-product-item__price-old">
-                                            20000đ
-                                        </span>
-                                        <span class="home-product-item__price-current">
-                                            30000đ
-                                        </span>
+                                <div class="infomation">
+                                    <h4>
+                                        <?php echo $row['prd_name']; ?>
+                                    </h4>
+                                    <div class="feeted">
+                                        <div class="vote">
+                                            <a class="rate" href="">
+                                                <?php echo $row['rated_star'] ?>
+                                            </a>
+                                            <div class="home-product-item__rating unscale">
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="vote second">
+                                            <a class="rate black" href="">
+                                                <?php echo $row['count_voted'] ?>
+                                            </a>
+                                            <p class="remake">Đánh Giá</p>
+                                        </div>
+                                        <div class="vote last">
+                                            <a class="rate black undecoration" href="">
+                                                <?php echo $row['sold'] ?>
+                                            </a>
+                                            <p class="remake">Đã bán</p>
+                                        </div>
                                     </div>
-                                    <div class="sale">
-                                        5% Giảm
+                                    <div class="price">
+                                        <div class="old_price home-product-item__price">
+                                            <span class="home-product-item__price-old">
+                                                <?php echo $row['price_old'] ?>đ
+                                            </span>
+                                            <span class="home-product-item__price-current">
+                                                <?php echo $row['price_new'] ?>đ
+                                            </span>
+                                        </div>
+                                        <div class="sale">
+                                            <?php echo $row['sale'] ?>% Giảm
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="tranfer">Vận Chuyển
-                                    <input class="input_tranfer" type="text"
-                                        placeholder="Vui lòng nhập địa chỉ nhận hàng">
-                                    phí vận chuyển <span>Miễn Phí được trả phí bởi nhà sản xuất</span>
-                                    <div class="d-flex">
-                                        <p class="col-2 mb-auto mt-auto p-0">số lượng</p>
-                                        <input class="input_tranfer pt-2 pb-2 col-3 ml-2" type="text" value="1">
+                                    <div class="tranfer">Vận Chuyển
+                                        <input class="input_tranfer" type="text"
+                                            placeholder="Vui lòng nhập địa chỉ nhận hàng">
+                                        phí vận chuyển <span>Miễn Phí được trả phí bởi nhà sản xuất</span>
+                                        <div class="d-flex">
+                                            <p class="col-2 mb-auto mt-auto p-0">số lượng</p>
+                                            <input class="input_tranfer pt-2 pb-2 col-3 ml-2" type="text" value="1">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="share d-flex">
-                                        <p>Chia sẻ</p>
-                                        <i class="footer-item__icon fab fa-facebook-square"></i>
-                                        <i class="footer-item__icon fab fa-linkedin"></i>
-                                    </div>
-                                    <div class="favorite d-flex">
-                                        <i class="home-product-item__like-icon-empty far
+                                    <div class="d-flex align-items-center">
+                                        <div class="share d-flex">
+                                            <p>Chia sẻ</p>
+                                            <i class="footer-item__icon fab fa-facebook-square"></i>
+                                            <i class="footer-item__icon fab fa-linkedin"></i>
+                                        </div>
+                                        <div class="favorite d-flex">
+                                            <i class="home-product-item__like-icon-empty far
                             fa-heart"></i>
-                                        <p class="liked">Đã thích (1230)</p>
+                                            <p class="liked">Đã thích (
+                                                <?php echo $row['count_favorite'] ?>)
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button class="btn_buy">Mua Ngay</button>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid wide">
+                    <div class="row sm-gutter">
+                        <!-- Category -->
+                        <div class="col mt-4">
+                            <nav class="category categoryed p-4">
+                                <div class="d-flex">
+                                    <img class="img_avt" src="./assets/img/avt.jpg" alt="">
+                                    <div class="author">
+                                        <p> Xưởng lì xì Boo Boo</p>
+                                        <span>Online 10 phút trước</span>
+                                        <span><i class="fa fa-map-marker"></i>
+                                            <?php echo $row['addres'] ?>
+                                        </span>
+                                    </div>
+                                    <button class="view_shop">Xem Shop</button>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="response d-flex">
+                                        <p>7</p>
+                                        <span>Sản Phẩm</span>
+                                    </div>
+                                    <div class="response d-flex">
+                                        <p>
+                                            <?php echo $row['rated_star'] ?>
+                                        </p>
+                                        <span>Đánh Giá</span>
+                                    </div>
+                                    <div class="response d-flex">
+                                        <p>99%</p>
+                                        <span>Phản Hồi Chat</span>
                                     </div>
                                 </div>
-                                <button class="btn_buy">Mua Ngay</button>
-                            </div>
-                        </nav>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="grid wide">
-                <div class="row sm-gutter">
-                    <!-- Category -->
-                    <div class="col mt-4">
-                        <nav class="category categoryed p-4">
-                            <div class="d-flex">
-                                <img class="img_avt" src="./assets/img/avt.jpg" alt="">
-                                <div class="author">
-                                    <p> Xưởng lì xì Boo Boo</p>
-                                    <span>Online 10 phút trước</span>
-                                    <span><i class="fa fa-map-marker" aria-hidden="true"></i> Hà Nội</span>
-                                </div>
-                                <button class="view_shop">Xem Shop</button>
-                            </div>
-                            <div class="d-flex">
-                                <div class="response d-flex">
-                                    <p>7</p>
-                                    <span>Sản Phẩm</span>
-                                </div>
-                                <div class="response d-flex">
-                                    <p>4.9</p>
-                                    <span>Đánh Giá</span>
-                                </div>
-                                <div class="response d-flex">
-                                    <p>99%</p>
-                                    <span>Phản Hồi Chat</span>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
 
-            <div class="grid wide">
-                <div class="row sm-gutter">
-                    <!-- Category -->
-                    <div class="col mt-4">
-                        <nav class="category categoryed p-4">
-                            <div class="d-flex">
-                                <h5>Chi tiết sản phẩm</h5>
+                <div class="grid wide">
+                    <div class="row sm-gutter">
+                        <!-- Category -->
+                        <div class="col mt-4">
+                            <nav class="category categoryed p-4">
+                                <div class="pb-3 d-flex flex-row justify-content-between">
+                                    <h5>Chi tiết sản phẩm</h5>
+                                    <div class="d-flex" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        <p class=" description-detail">Kho, chiều dài</p>
+                                        <i class="mt-auto mb-auto ml-2 fa fa-chevron-right" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="descriptionsalble">
+                                    <h5>Mô tả sản phẩm</h5>
+                                    <span class="description_more">
+                                        <?php echo $row['description']; ?>
+                                    </span>
+                                </div>
+                            </nav>
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-detail">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="col-4"></div>
+                                            <h1 class="col-4 modal-title fs-5" id="staticBackdropLabel">Chi tiết</h1>
+                                            <button type="button" class="col-4 btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="descriptioned row">
+                                                <p class="col-3">Kho</p>
+                                                <span class="col-9">13000</span>
+                                            </div>
+                                            <div class="descriptioned row">
+                                                <p class="col-3">Chiều dài</p>
+                                                <span class="col-9">
+                                                    <?php echo $row['length'] ?>cm
+                                                </span>
+                                            </div>
+                                            <div class="descriptioned row">
+                                                <p class="col-3">Gửi từ</p>
+                                                <span class="col-9">
+                                                    <?php echo $row['addres'] ?>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary btn-ok"
+                                                data-bs-dismiss="modal">OK</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </nav>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php } ?>
         </div>
         <!-- Footer -->
         <footer class="footer">
