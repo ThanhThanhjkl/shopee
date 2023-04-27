@@ -1,7 +1,40 @@
 <?php
-$sql = "SELECT * FROM products inner join brands on products.brand_id = brands.brand_id";
+$id = $_GET['id'];
+$sql = "SELECT * FROM address_client where phone_number = $id";
 $query = mysqli_query($connect, $sql);
 ?>
+<style>
+    <?php include "./assets/css/cart.css" ?>
+    <?php include "./assets/css/base.css" ?>
+    <?php include "./assets/css/main.css" ?>
+    <?php include "./assets/css/grid.css" ?>
+    <?php include "./assets/css/responsive.css" ?>
+</style>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopee</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</head>
 
 <body>
     <div class="app">
@@ -106,9 +139,14 @@ $query = mysqli_query($connect, $sql);
 
                 <!-- Header with Search -->
                 <div class="header-with-search">
-
+                    <div class="cancel_icon d-md-none d-block">
+                        <a href="/">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <h2>Đơn Mua</h2>
                     <!-- Header Logo -->
-                    <div class="header__logo hide-on-tablet">
+                    <div class="header__logo hide-on-tablet d-none d-md-block">
                         <a href="/" class="header__logo-link">
                             <svg class="header__logo-img" viewBox="0 0 192 65">
                                 <g fill-rule="evenodd">
@@ -273,205 +311,122 @@ $query = mysqli_query($connect, $sql);
                             <i class="header__search-btn-icon fas fa-search"></i>
                         </button>
                     </div>
-                    <!-- Cart layout -->
-                    <div class="header__cart">
-                        <div class="header__cart-wrap">
-                            <a id="cart-link" href="">
-                                <i class="header__cart-icon fas fa-shopping-cart"></i>
-                            </a>
-                            <!-- No cart : header__cart-list--no-cart -->
-                        </div>
-                    </div>
+                    <div></div>
                 </div>
             </div>
-            <ul class="header__sort-bar">
-                <li class="header__sort-item header__sort-item--active">
-                    <a href="" class="header__sort-link">Liên Quan</a>
-                </li>
-                <li class="header__sort-item">
-                    <a href="" class="header__sort-link">Mới Nhất</a>
-                </li>
-                <li class="header__sort-item">
-                    <a href="" class="header__sort-link">Bán chạy</a>
-                </li>
-                <li class="header__sort-item">
-                    <a href="" class="header__sort-link">Giá</a>
-                </li>
-            </ul>
         </header>
         <div class="app__container">
-            <div class="grid wide">
-                <div class="row sm-gutter app__content">
-                    <!-- Category -->
-                    <div class="col l-2 m-0 c-0">
-                        <nav class="category">
-                            <h3 class="category__heading">
-                                Danh mục
-                            </h3>
-                            <ul class="category-list">
-                                <li class="category-item category-item--active">
-                                    <a href="#" class="category-item__link">Giấy Lì Xì Loại I</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col l-10 m-12 c-12">
-                        <!-- Filter -->
-                        <div class="home-filter hide-on-mobile-tablet">
-                            <span class="home-filter__label">Sắp xếp theo</span>
-                            <button class="home-filter__btn btn">Phổ biến</button>
-                            <button class="home-filter__btn btn btn--primary">
-                                Mới nhất
-                            </button>
-                            <button class="home-filter__btn btn">Bán chạy</button>
-                            <div class="select-input">
-                                <span class="select-input__label">Giá</span>
-                                <i class="select-input__icon fas fa-angle-down"></i>
-                                <!-- List option -->
-                                <ul class="select-input__list">
-                                    <li class="select-input__item">
-                                        <a href="#" class="select-input__link">Giá: Thấp đến Cao</a>
-                                    </li>
-                                    <li class="select-input__item">
-                                        <a href="#" class="select-input__link">Giá: Cao đến Thấp</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="home-filter__page">
-                                <span class="home-filter__page-num">
-                                    <span class="home-filter__page-current">1</span>/2
-                                </span>
+            <?php
+            while ($row = mysqli_fetch_assoc($query)) { ?>
+                <div class="grid wide">
+                    <div class="row sm-gutter">
+                        <div class="line"></div>
+                        <div class="cart_item">
+                            <div class="container">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex">
+                                        <p class="favorite">Yêu thích</p>
+                                        <h3 class="mt-auto mb-auto ml-3">Xưởng lì xì Boo Boo</h3>
+                                    </div>
+                                    <p class="mt-auto mb-auto status_transport">Đang giao</p>
+                                </div>
+                                <a class="undecoration" href="">
+                                    <div class="d-flex col-12 row1">
+                                        <?php
+                                        $prd_name = mysqli_real_escape_string($connect, $row['prd_name']);
+                                        $sql_prd = "SELECT * FROM products WHERE prd_name = ?";
+                                        $stmt_prd = mysqli_prepare($connect, $sql_prd);
+                                        mysqli_stmt_bind_param($stmt_prd, "s", $prd_name);
+                                        mysqli_stmt_execute($stmt_prd);
+                                        $result_prd = mysqli_stmt_get_result($stmt_prd);
+                                        while ($row_prd = mysqli_fetch_assoc($result_prd)) {
+                                            ?>
+                                            <img class="col-3 p-0 mr-3" src="<?php echo $row_prd['image']; ?>" width="80px"
+                                                height="80px">
+                                            <?php
+                                        }
+                                        ?>
+                                        <div class="col-9 px-0">
+                                            <p class="title_cart m-0">
+                                                <?php echo $row['prd_name'] ?>
+                                            </p>
+                                            <p class="title_cart mb-0 mt-4 text-end">x
+                                                <?php echo $row['amount'] ?>
+                                            </p>
+                                            <?php
+                                            $prd_name = mysqli_real_escape_string($connect, $row['prd_name']);
+                                            $sql_prd = "SELECT * FROM products where prd_name = ?";
+                                            $stmt_prd = mysqli_prepare($connect, $sql_prd);
+                                            mysqli_stmt_bind_param($stmt_prd, "s", $prd_name);
+                                            mysqli_stmt_execute($stmt_prd);
+                                            $result_prd = mysqli_stmt_get_result($stmt_prd);
+                                            while ($row_prd = mysqli_fetch_assoc($result_prd)) { ?>
+                                                <p class="title_cart m-0 text-end">
+                                                    <?php echo $row_prd['price_new'] ?>
+                                                </p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="d-flex total mt-3 mx-2 justify-content-between">
+                                    <p class="amount">
+                                        <?php echo $row['amount'] ?> sản phẩm
+                                    </p>
+                                    <div class="d-flex">
+                                        <p class="total_title mr-2">Thành tiền:</p>
+                                        <?php
+                                        $prd_name = mysqli_real_escape_string($connect, $row['prd_name']);
+                                        $sql_prd = "SELECT * FROM products where prd_name = ?";
+                                        $stmt_prd = mysqli_prepare($connect, $sql_prd);
+                                        mysqli_stmt_bind_param($stmt_prd, "s", $prd_name);
+                                        mysqli_stmt_execute($stmt_prd);
+                                        $result_prd = mysqli_stmt_get_result($stmt_prd);
+                                        while ($row_prd = mysqli_fetch_assoc($result_prd)) { ?>
+                                            <p class="price">
+                                                <?php echo $row_prd['price_new'] ?>
+                                            </p>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                                <div id="countdown-timer" class="status mt-3"></div>
+                                <div data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="text-end"><button
+                                        class="btn-cancel">Hủy đơn</button></div>
 
-                                <div class="home-filter__page-control">
-                                    <a href="" class="home-filter__page-btn
-                      home-filter__page-btn--disabled">
-                                        <i class="home-filter__page-icon fas fa-angle-left"></i>
-                                    </a>
-                                    <a href="" class="home-filter__page-btn">
-                                        <i class="home-filter__page-icon fas fa-angle-right"></i>
-                                    </a>
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-detail">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="col-4"></div>
+                                                <h1 class="col-4 modal-title fs-5 text-center" id="staticBackdropLabel">Hủy
+                                                    Đơn</h1>
+                                                <button type="button" class="col-4 btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="descriptioned row">
+                                                    <p class="col-3"></p>
+                                                    <span class="col-9 accept">Bạn chắc chắn muốn hủy đơn hàng ?</span>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer mx-4 justify-content-between">
+                                                <button type="button" class="button-axept btn btn-secondary btn-ok"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                <a href="index.php?page_layout=delete_cart&id=<?php echo $row['id'] ?>">
+                                                    <button type="button"
+                                                        class="button-axept btn-sucssested btn btn-secondary btn-ok"
+                                                        data-bs-dismiss="modal">Ok</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Mobile Category -->
-                        <nav class="mobile-category">
-                            <ul class="mobile-category__list">
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/Th%E1%BB%83-Thao-Du-L%E1%BB%8Bch-cat.11035478"
-                                        class="mobile-category__link">Thể Thao Và Du Lịch</a>
-                                </li>
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/Thi%E1%BA%BFt-B%E1%BB%8B-%C4%90i%E1%BB%87n-Gia-D%E1%BB%A5ng-cat.11036971"
-                                        class="mobile-category__link">Thiết Bị Điện Gia Dụng</a>
-                                </li>
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/Ph%E1%BB%A5-Ki%E1%BB%87n-Trang-S%E1%BB%A9c-N%E1%BB%AF-cat.11035853"
-                                        class="mobile-category__link">Phụ Kiện & Trang Sức Nữ</a>
-                                </li>
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/B%C3%A1ch-H%C3%B3a-Online-cat.11036525"
-                                        class="mobile-category__link">Bách Hóa Online</a>
-                                </li>
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/Nh%C3%A0-S%C3%A1ch-Online-cat.11036863"
-                                        class="mobile-category__link">Nhà Sách Online</a>
-                                </li>
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/T%C3%BAi-V%C3%AD-N%E1%BB%AF-cat.11035761"
-                                        class="mobile-category__link">Túi Ví Nữ</a>
-                                </li>
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/Nh%C3%A0-C%E1%BB%ADa-%C4%90%E1%BB%9Di-S%E1%BB%91ng-cat.11036670"
-                                        class="mobile-category__link">Nhà Cửa Và Đời Sống</a>
-                                </li>
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/M%E1%BA%B9-B%C3%A9-cat.11036194"
-                                        class="mobile-category__link">Mẹ và bé</a>
-                                </li>
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/%C4%90i%E1%BB%87n-Tho%E1%BA%A1i-Ph%E1%BB%A5-Ki%E1%BB%87n-cat.11036030"
-                                        class="mobile-category__link">Điện Thoại & Phụ Kiện</a>
-                                </li>
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/S%E1%BA%AFc-%C4%90%E1%BA%B9p-cat.11036279"
-                                        class="mobile-category__link">Sắc Đẹp</a>
-                                </li>
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/S%E1%BB%A9c-Kh%E1%BB%8Fe-cat.11036345"
-                                        class="mobile-category__link">Sức Khỏe</a>
-                                </li>
-                                <li class="mobile-category__item">
-                                    <a href="https://shopee.vn/%C4%90%E1%BB%93ng-H%E1%BB%93-cat.11035788"
-                                        class="mobile-category__link">Đồng Hồ</a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <!-- Product -->
-                        <div class="home-product">
-                            <div class="row sm-gutter">
-                                <!-- Product item -->
-                                <?php
-                                $i = 1;
-                                while ($row = mysqli_fetch_assoc($query)) { ?>
-                                    <div class="col l-2-4 m-4 c-6">
-                                        <a href="index.php?page_layout=details&id=<?php echo $row['prd_id'] ?>"
-                                            class="home-product-item">
-                                            <div class="home-product-item__img"
-                                                style="background-image: url(<?php echo $row['image'] ?>);"></div>
-                                            <h4 class="home-product-item__name">
-                                                <?php echo $row['prd_name']; ?>
-                                            </h4>
-                                            <div class="home-product-item__price">
-                                                <span class="home-product-item__price-old">
-                                                    <?php echo $row['price_old']; ?>đ
-                                                </span>
-                                                <span class="home-product-item__price-current">
-                                                    <?php echo $row['price_new']; ?>đ
-                                                </span>
-                                            </div>
-                                            <div class="home-product-item__action">
-                                                <span class="home-product-item__like
-                          home-product-item__like--liked">
-                                                    <i class="home-product-item__like-icon-empty far
-                            fa-heart"></i>
-                                                    <i class="home-product-item__like-icon-fill fas
-                            fa-heart"></i>
-                                                </span>
-                                                <div class="home-product-item__rating">
-                                                    <i class="home-product-item__star--gold fas fa-star"></i>
-                                                    <i class="home-product-item__star--gold fas fa-star"></i>
-                                                    <i class="home-product-item__star--gold fas fa-star"></i>
-                                                    <i class="home-product-item__star--gold fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
-                                                <div class="home-product-item__sold">
-                                                    <?php echo $row['sold']; ?> Đã bán
-                                                </div>
-                                            </div>
-                                            <div class="home-product-item__origin">
-                                                <span class="home-product-item__brand">
-                                                    <?php echo $row['addres']; ?>
-                                                </span>
-                                            </div>
-                                            <div class="home-product-item__favourite">
-                                                <i class="fas fa-check "></i>
-                                                <span>Yêu thích</span>
-                                            </div>
-                                            <div class="home-product-item__sale-off">
-                                                <span class="home-product-item__sale-off-percent">
-                                                    <?php echo $row['sale'] ?>%
-                                                </span>
-                                                <span class="home-product-item__sale-off-label">GIẢM</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                <?php } ?>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
+            <?php } ?>
         </div>
         <!-- Footer -->
         <footer class="footer">
@@ -567,8 +522,33 @@ $query = mysqli_query($connect, $sql);
         </footer>
     </div>
     <script>
-        const phone_number = localStorage.getItem("phone_number");
-        const anchorTag = document.getElementById("cart-link");
-        anchorTag.href = `index.php?page_layout=cart&id=${phone_number}`;
+        // Set the date 3 days from now
+        const countDownDate = new Date().getTime() + (4 * 24 * 60 * 60 * 1000);
+
+        // Update the count down every 1 second
+        const timerInterval = setInterval(function () {
+
+            // Get the current date and time
+            const now = new Date().getTime();
+
+            // Calculate the distance between now and the count down date
+            const distance = countDownDate - now;
+
+            // Calculate days, hours, minutes and seconds remaining
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the countdown timer
+            const countdownElement = document.getElementById("countdown-timer");
+            countdownElement.innerHTML = `Đơn hàng đã được giao cho nhà vận chuyển <br> dự kiến sau ${days} ngày`;
+
+            // If the count down is finished, clear the interval and display a message
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                countdownElement.innerHTML = "EXPIRED";
+            }
+        }, 1000);
     </script>
 </body>

@@ -1,8 +1,37 @@
 <?php
 $id = $_GET['id'];
+$sql_cmt = "SELECT * FROM comment";
+$query_cmt = mysqli_query($connect, $sql_cmt);
 $sql = "SELECT * FROM products where prd_id = $id";
 $query = mysqli_query($connect, $sql);
+if (isset($_POST['submit'])) {
+    $row = mysqli_fetch_assoc($query);
+
+    $name = $_POST['name'];
+    $phone_number = $_POST['phone_number'];
+    $address = $_POST['address'];
+    $amount = $_POST['amount'];
+    $prd_name = $row['prd_name'];
+
+    $sql_post = "INSERT INTO address_client (name, phone_number, address, amount, prd_name )
+    VALUES ('$name', '$phone_number', '$address', $amount, '$prd_name')";
+    $query_post = mysqli_query($connect, $sql_post);
+    echo "<script>document.write(localStorage.setItem('name', '" . $name . "'))</script>";
+    echo "<script>document.write(localStorage.setItem('phone_number', '" . $phone_number . "'))</script>";
+    echo "<script>document.write(localStorage.setItem('address', '" . $address . "'))</script>";
+    echo "<script>document.write(localStorage.setItem('amount', '" . $amount . "'))</script>";
+    echo "<script>document.write(localStorage.setItem('prd_name', '" . $prd_name . "'));  window.location = 'index.php?page_layout=cart&id=$phone_number';</script>";
+    // header("Location: index.php?page_layout=cart&id=$phone_number");
+}
 ?>
+
+<style>
+    <?php include "./assets/css/detail.css" ?>
+    <?php include "./assets/css/base.css" ?>
+    <?php include "./assets/css/main.css" ?>
+    <?php include "./assets/css/grid.css" ?>
+    <?php include "./assets/css/responsive.css" ?>
+</style>
 
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -10,11 +39,6 @@ $query = mysqli_query($connect, $sql);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopee</title>
-    <link rel="stylesheet" href="./assets/css/base.css" />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="stylesheet" href="./assets/css/grid.css" />
-    <link rel="stylesheet" href="./assets/css/responsive.css" />
-    <link rel="stylesheet" href="./assets/css/detail.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -137,7 +161,7 @@ $query = mysqli_query($connect, $sql);
 
                 <!-- Header with Search -->
                 <div class="header-with-search">
-                    <div class="cancel_icon">
+                    <div class="cancel_icon d-md-none d-block">
                         <a href="/">
                             <i class="fa fa-arrow-left" aria-hidden="true"></i>
                         </a>
@@ -311,7 +335,7 @@ $query = mysqli_query($connect, $sql);
 
                     <!-- Cart layout -->
                     <div class="header__cart">
-                        <a href="https://shopee.vn/cart" class="header__cart-wrap">
+                        <a id="redirected" href="" class="header__cart-wrap">
                             <i class="header__cart-icon fas fa-shopping-cart"></i>
                         </a>
                     </div>
@@ -400,30 +424,46 @@ $query = mysqli_query($connect, $sql);
                                             <?php echo $row['sale'] ?>% Giảm
                                         </div>
                                     </div>
-                                    <div class="tranfer">Vận Chuyển
-                                        <input class="input_tranfer" type="text"
-                                            placeholder="Vui lòng nhập địa chỉ nhận hàng">
-                                        phí vận chuyển <span>Miễn Phí được trả phí bởi nhà sản xuất</span>
-                                        <div class="d-flex">
-                                            <p class="col-2 mb-auto mt-auto p-0">số lượng</p>
-                                            <input class="input_tranfer pt-2 pb-2 col-3 ml-2" type="text" value="1">
+                                    <form method="POST" enctype="multipart/form-data">
+                                        <div class="tranfer">Vận Chuyển
+                                            <input id="myAddress" class="input_tranfer" name="address" type="text" required
+                                                placeholder="Vui lòng nhập địa chỉ nhận hàng">
+                                            phí vận chuyển <span>Miễn Phí được trả phí bởi nhà sản xuất</span>
+                                            <div class="d-flex">
+                                                <p class="col-2 mb-auto mt-auto p-0">số lượng</p>
+                                                <input id="myAmount" class="input_tranfer pt-2 pb-2 col-3 ml-2"
+                                                    name="amount" type="text" required>
+                                            </div>
+                                            <div class="d-flex flex-column mb-3">
+                                                <p class="col-12 mb-auto mt-auto p-0">tên người đặt hàng</p>
+                                                <input id="myName" class="input_tranfer m-0 pt-3 pb-3 col-12" name="name"
+                                                    type="text" placeholder="vui lòng nhập tên" required>
+                                            </div>
+                                            <div class="d-flex flex-column mb-3">
+                                                <p class="col-12 mb-auto mt-auto p-0">số điện thoại nhận hàng</p>
+                                                <input id="myPhone" class="input_tranfer m-0 pt-3 pb-3 col-12"
+                                                    name="phone_number" type="text"
+                                                    placeholder="vui lòng nhập số điện thoại" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="share d-flex">
-                                            <p>Chia sẻ</p>
-                                            <i class="footer-item__icon fab fa-facebook-square"></i>
-                                            <i class="footer-item__icon fab fa-linkedin"></i>
-                                        </div>
-                                        <div class="favorite d-flex">
-                                            <i class="home-product-item__like-icon-empty far
+                                        <div class="d-flex align-items-center">
+                                            <div class="share d-flex">
+                                                <p>Chia sẻ</p>
+                                                <i class="footer-item__icon fab fa-facebook-square"></i>
+                                                <i class="footer-item__icon fab fa-linkedin"></i>
+                                            </div>
+                                            <div class="favorite d-flex">
+                                                <i class="home-product-item__like-icon-empty far
                             fa-heart"></i>
-                                            <p class="liked">Đã thích (
-                                                <?php echo $row['count_favorite'] ?>)
-                                            </p>
+                                                <p class="liked">Đã thích (
+                                                    <?php echo $row['count_favorite'] ?>)
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <button class="btn_buy">Mua Ngay</button>
+                                        <button name="submit" type="submit" onclick="buy()" class="btn_buy">
+                                            Mua ngay
+                                        </button>
+                                    </form>
                                 </div>
                             </nav>
                         </div>
@@ -470,7 +510,7 @@ $query = mysqli_query($connect, $sql);
                     <div class="row sm-gutter">
                         <!-- Category -->
                         <div class="col mt-4">
-                            <nav class="category categoryed p-4">
+                            <nav class="category d-block categoryed p-4">
                                 <div class="pb-3 d-flex flex-row justify-content-between">
                                     <h5>Chi tiết sản phẩm</h5>
                                     <div class="d-flex" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -520,6 +560,68 @@ $query = mysqli_query($connect, $sql);
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid wide">
+                    <div class="row sm-gutter">
+                        <!-- Category -->
+                        <div class="col mt-4">
+                            <nav class="category d-block categoryed p-4">
+                                <div class="d-flex pb-3">
+                                    <div class="col-8 p-0">
+                                        <h4>ĐÁNH GIÁ SẢN PHẨM</h4>
+                                        <div class="d-flex">
+                                            <div class="ms-0 mt-0 mb-0 mr-3 home-product-item__rating unscale">
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="fas fa-star home-product-item__star--gold"></i>
+                                            </div>
+                                            <p class="mb-0 rated-remake">4.9/5</p>
+                                            <p class="mb-0 count-remake">(40 đánh giá)</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 d-flex justify-content-end p-0 mt-auto mb-auto text-end">
+                                        <h4 class="view-all">Xem tất cả</h4>
+                                        <i class="left_arow mt-auto mb-auto ml-2 fa fa-chevron-right"
+                                            aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <?php
+                                while ($row = mysqli_fetch_assoc($query_cmt)) { ?>
+                                    <div class="comment d-flex">
+                                        <div class="col-1 p-0 avatar">
+                                            <img width="100%" src="<?php echo $row['cmt_avt'] ?>" alt="">
+                                        </div>
+                                        <div class="col-11">
+                                            <p class="comment_name">
+                                                <?php echo $row['cmt_name'] ?>
+                                            </p>
+                                            <div class="ms-0 mt-0 mb-0 mr-3 home-product-item__rating unscale">
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="fas fa-star home-product-item__star--gold"></i>
+                                            </div>
+                                            <p class="type_product">phân loại hàng:
+                                                <?php echo $row['cmt_type'] ?>
+                                            </p>
+                                            <p class="comment_content">
+                                                <?php echo $row['cmt_content'] ?>
+                                            </p>
+                                            <div class="row group_images d-flex">
+                                                <img class="col-4" src="<?php echo $row['cmt_img1'] ?>" alt="">
+                                                <img class="col-4" src="<?php echo $row['cmt_img2'] ?>" alt="">
+                                            </div>
+                                            <span class="row justify-content-end pt-3 comment_time">02-02-2023 14:51</span>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -618,4 +720,38 @@ $query = mysqli_query($connect, $sql);
             </div>
         </footer>
     </div>
+    <script>
+        let address = localStorage.getItem("address");
+        let amount = localStorage.getItem("amount");
+        let name = localStorage.getItem("name");
+        let phone_number = localStorage.getItem("phone_number");
+        let prd_name = localStorage.getItem("prd_name");
+
+        let hrefed = `index.php?page_layout=cart&id=${phone_number}`
+        document.getElementById("redirected").href =hrefed;
+
+        if (address === null) {
+            document.getElementById("myAddress").value = "";
+        } else {
+            document.getElementById("myAddress").value = address;
+        }
+        // 
+        if (amount === null) {
+            document.getElementById("myAmount").value = "";
+        } else {
+            document.getElementById("myAmount").value = amount;
+        }
+        // 
+        if (name === null) {
+            document.getElementById("myName").value = "";
+        } else {
+            document.getElementById("myName").value = name;
+        }
+        // 
+        if (phone_number === null) {
+            document.getElementById("myPhone").value = "";
+        } else {
+            document.getElementById("myPhone").value = phone_number;
+        }
+    </script>
 </body>

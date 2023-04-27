@@ -58,7 +58,7 @@
     }
 
     .header {
-        background-image: none;
+        background-image: none !important;
     }
 
     .categoryed {
@@ -78,13 +78,30 @@
     }
 
     .app__container {
-        margin: 0;
+        margin: 0 !important;
     }
 
     .sale {
         margin-top: auto;
         margin-bottom: auto;
         margin-left: 5px !important;
+    }
+
+    .modal-detail {
+        margin: 0 !important;
+        width: 100% !important;
+        position: absolute !important;
+        bottom: 0 !important
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .modal-detail {
+        left: 35% !important;
+        margin: 0 !important;
+        width: 100% !important;
+        position: absolute !important;
+        bottom: 50% !important
     }
 }
 
@@ -96,13 +113,6 @@
 .description-detail {
     font-size: 13px;
     margin: 0;
-}
-
-.modal-detail {
-    margin: 0 !important;
-    width: 100% !important;
-    position: absolute !important;
-    bottom: 0 !important
 }
 
 .modal-detail .modal-header {
@@ -357,4 +367,55 @@
 .description_more {
     font-size: 13px !important;
     color: rgba(0, 0, 0, .65);
+}
+
+.rated-remake {
+    color: #ee4d2d;
+    font-size: 13px;
+}
+
+.count-remake {
+    color: rgba(0, 0, 0, .54);
+    font-size: 13px;
+}
+
+.view-all {
+    font-size: 13px;
+    color: #ee4d2d;
+    margin: 0 !important;
+}
+
+.left_arow {
+    color: #ee4d2d;
+}
+
+.comment {
+    border-top: 1px solid rgba(0, 0, 0, .09);
+    padding: 10px 0;
+}
+
+.comment_time {
+    font-size: 12px;
+    color: rgba(0, 0, 0, .26);
+}
+
+.avatar img {
+    border-radius: 50%;
+}
+
+.comment_name {
+    font-size: 13px;
+}
+
+.type_product {
+    font-size: 12px;
+    color: rgba(0, 0, 0, .26)
+}
+
+.comment_content {
+    font-size: 13px;
+}
+.buy_now {
+    text-decoration: none !important;
+    color: white !important;
 }

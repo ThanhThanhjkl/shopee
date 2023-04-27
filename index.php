@@ -27,14 +27,11 @@ require_once 'config/db.php';
             case 'details':
                 require_once 'products/details.php';
                 break;
-            case 'add':
-                require_once 'products/add.php';
+            case 'cart':
+                require_once 'products/cart.php';
                 break;
-            case 'update':
-                require_once 'products/update.php';
-                break;
-            case 'delete':
-                require_once 'products/delete.php';
+            case 'delete_cart':
+                require_once 'products/delete_cart.php';
                 break;
 
             default:
