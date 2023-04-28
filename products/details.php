@@ -12,6 +12,7 @@ if (isset($_POST['submit'])) {
     $address = $_POST['address'];
     $amount = $_POST['amount'];
     $prd_name = $row['prd_name'];
+    $price_new = $row['price_new'];
 
     $sql_post = "INSERT INTO address_client (name, phone_number, address, amount, prd_name )
     VALUES ('$name', '$phone_number', '$address', $amount, '$prd_name')";
@@ -20,8 +21,8 @@ if (isset($_POST['submit'])) {
     echo "<script>document.write(localStorage.setItem('phone_number', '" . $phone_number . "'))</script>";
     echo "<script>document.write(localStorage.setItem('address', '" . $address . "'))</script>";
     echo "<script>document.write(localStorage.setItem('amount', '" . $amount . "'))</script>";
-    echo "<script>document.write(localStorage.setItem('prd_name', '" . $prd_name . "'));  window.location = 'index.php?page_layout=cart&id=$phone_number';</script>";
-    // header("Location: index.php?page_layout=cart&id=$phone_number");
+    echo "<script>document.write(localStorage.setItem('price', '" . $price_new . "'))</script>";
+    echo "<script>document.write(localStorage.setItem('prd_name', '" . $prd_name . "'));  window.location = 'index.php?page_layout=payment&id=$price_new';</script>";
 }
 ?>
 
@@ -614,8 +615,8 @@ if (isset($_POST['submit'])) {
                                                 <?php echo $row['cmt_content'] ?>
                                             </p>
                                             <div class="row group_images d-flex">
-                                                <img class="col-4" src="<?php echo $row['cmt_img1'] ?>" alt="">
-                                                <img class="col-4" src="<?php echo $row['cmt_img2'] ?>" alt="">
+                                                <img class="col-5" src="<?php echo $row['cmt_img1'] ?>" alt="">
+                                                <img class="col-5" src="<?php echo $row['cmt_img2'] ?>" alt="">
                                             </div>
                                             <span class="row justify-content-end pt-3 comment_time">02-02-2023 14:51</span>
                                         </div>

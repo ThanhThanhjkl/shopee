@@ -93,6 +93,18 @@
         position: absolute !important;
         bottom: 0 !important
     }
+
+    .header__cart-wrap {
+        padding: 10px !important;
+        background-color: rgba(0, 0, 0, 0.26);
+        border-radius: 50%;
+    }
+    .header__cart-wrap i {
+        font-size: 20px !important;
+    }
+    .group_images img {
+        height: 130px;
+    }
 }
 
 @media only screen and (min-width: 1025px) {
@@ -267,6 +279,7 @@
     font-size: 16px;
     margin-top: 20px;
     margin-bottom: 10px;
+    border-radius: 2px;
 }
 
 .share {
@@ -309,9 +322,10 @@
 }
 
 .cancel_icon a i {
-    padding: 7px;
+    padding: 10px 12px;
     background-color: rgba(0, 0, 0, 0.26);
     border-radius: 50%;
+    font-size: 20px !important;
 }
 
 .img_avt {
@@ -415,6 +429,7 @@
 .comment_content {
     font-size: 13px;
 }
+
 .buy_now {
     text-decoration: none !important;
     color: white !important;

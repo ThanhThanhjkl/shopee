@@ -33,6 +33,9 @@ require_once 'config/db.php';
             case 'delete_cart':
                 require_once 'products/delete_cart.php';
                 break;
+            case 'payment':
+                require_once 'products/payment.php';
+                break;
 
             default:
                 require_once 'products/list.php';
