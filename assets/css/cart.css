@@ -68,12 +68,14 @@
 .total {
     border-bottom: 1px solid rgba(0, 0, 0, .05);
 }
+
 .status {
     font-size: 13px;
-    color:#00bfa5;
+    color: #00bfa5;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, .05);
 }
+
 .btn-cancel {
     color: white;
     border: none;
@@ -83,22 +85,39 @@
     padding: 10px 30px;
     margin-bottom: 10px;
 }
+
 .btn-cancel a {
     text-decoration: none;
     color: white;
 }
+
 .accept {
     font-size: 13px;
 }
-.button-axept{
+
+.button-axept {
     font-size: 13px !important;
     border: none !important;
 }
+
 .btn-sucssested {
     background-color: #ee4d2d !important;
     color: white;
 }
+
 .btn-sucssested a {
     color: white !important;
     text-decoration: none;
+}
+
+.modal-header {
+    border: none !important;
+}
+
+.modal-footer {
+    border: none !important;
+}
+
+.btn-cancel {
+    background-color: #ee4d2d !important;
 }

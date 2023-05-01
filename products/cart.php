@@ -399,19 +399,20 @@ $query = mysqli_query($connect, $sql);
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <div class="col-4"></div>
-                                                <h1 class="col-4 modal-title fs-5 text-center" id="staticBackdropLabel">Hủy
-                                                    Đơn</h1>
+                                                <h2 class="col-4 modal-title text-center" id="staticBackdropLabel">Hủy
+                                                    Đơn</h2>
                                                 <button type="button" class="col-4 btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="descriptioned row">
-                                                    <p class="col-3"></p>
-                                                    <span class="col-9 accept">Bạn chắc chắn muốn hủy đơn hàng ?</span>
+                                                <div class="descriptioned row justify-content-center">
+                                                    <span class="col-9 accept">Bạn chắc chắn muốn hủy đơn hàng
+                                                        <?php echo $row['prd_name'] ?> ?
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="modal-footer mx-4 justify-content-between">
-                                                <button type="button" class="button-axept btn btn-secondary btn-ok"
+                                                <button type="button" class="button-axept btn-cancel btn btn-secondary btn-ok"
                                                     data-bs-dismiss="modal">Cancel</button>
                                                 <a href="index.php?page_layout=delete_cart&id=<?php echo $row['id'] ?>">
                                                     <button type="button"

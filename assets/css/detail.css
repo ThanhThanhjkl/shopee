@@ -212,6 +212,7 @@
     color: #ee4d2d;
     font-size: 15px;
     text-decoration: #ee4d2d;
+    text-decoration: none !important;
 }
 
 .rate:hover {
@@ -223,7 +224,7 @@
     transform: unset !important;
     margin-top: auto !important;
     margin-bottom: auto !important;
-    margin-left: 10px !important;
+    margin-left: 5px !important;
 }
 
 .price {
