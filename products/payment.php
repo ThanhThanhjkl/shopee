@@ -54,7 +54,7 @@
             CURLOPT_POSTFIELDS => json_encode(
                 array(
                     'type' => 'text',
-                    'data' => '2|99|0868438441|LI XI BOO BOO||0|0|'.$id.'|CHUYENTIEN|transfer_myqr',
+                    'data' => '2|99|0868438441|LI XI BOO BOO||0|0|' . $id . '|CHUYENTIEN|transfer_myqr',
                     'background' => 'rgb(255,255,255)',
                     'foreground' => 'rgb(0,0,0)',
                     'logo' => 'https://site.com/logo.png',
@@ -353,9 +353,37 @@
                 <div class="line"></div>
                 <div class="cart_item">
                     <div class="container">
+                        <img width="100%" class="mb-3" src="./assets/img/momo_img.jpg" alt="">
                         <h1>Thanh toán trực tiếp bằng mã QR Code</h1>
-                        MOMO
-                        <img class="qr_code" src="<?php echo $link ?>" alt="">
+                        <h3>Hướng dẫn thanh toán bằng ví điện tử MoMo</h3>
+                        <div>
+                            <div class="step">
+                                <div class="d-flex flex-column">
+                                    <h3 class="col-3">Bước 1:</h3>
+                                    <span class="col-12 step_content">Tải và mở ví điện tử momo , chọn “Quét
+                                        Mã”, di chuyển camera đến QR Code bên dưới:</span>
+                                </div>
+                                <div class="d-flex">
+                                    <img class="col-6" src="./assets/img/step1.jpg" alt="">
+                                    <img class="col-6" src="./assets/img/step2.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="mt-3 mb-3 d-flex flex-column justify-content-center">
+                                <img class="qr_code" src="<?php echo $link ?>" alt="">
+                                <span class="qr_label">Mã Qr cho đơn hàng của bạn</span>
+                            </div>
+                            <div class="step">
+                                <div class="d-flex flex-column">
+                                    <h3 class="col-3">Bước 2:</h3>
+                                    <span class="col-12 step_content">Xác nhận số tiền cần thanh toán và nhập mật khẩu,
+                                        vân tay hoặc nhận diện khuôn mặt (faceID).</span>
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <img class="col-6" src="./assets/img/step3.jpg" alt="">
+                                    <img class="col-6" src="./assets/img/step4.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
