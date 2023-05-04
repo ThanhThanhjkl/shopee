@@ -473,7 +473,7 @@ if (isset($_POST['submit'])) {
                                         <div class="nav_buy">
                                             <div class="btn-left col-6 p-0">
                                                 <div class="col-6 firt_icon text-center">
-                                                    <img width="50%" src="./assets/img/icon_chat.png" alt="">
+                                                    <img width="50%" src="./assets/img/aaa.png" alt="">
                                                 </div>
                                                 <div class="col-6 text-center">
                                                     <img width="50%" src="./assets/img/icon_addcart.png" alt="">

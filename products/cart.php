@@ -364,7 +364,7 @@ $order_time = $row['order_time'];
                                         $result_prd = mysqli_stmt_get_result($stmt_prd);
                                         while ($row_prd = mysqli_fetch_assoc($result_prd)) { ?>
                                             <p class="title_cart m-0 text-end">
-                                                <?php echo $row_prd['price_new'] ?>
+                                                đ<?php echo number_format($row_prd['price_new']) ?>
                                             </p>
                                         <?php } ?>
                                     </div>
@@ -385,7 +385,7 @@ $order_time = $row['order_time'];
                                     $result_prd = mysqli_stmt_get_result($stmt_prd);
                                     while ($row_prd = mysqli_fetch_assoc($result_prd)) { ?>
                                         <p class="price">
-                                            <?php echo $row_prd['price_new'] ?>
+                                            đ<?php echo number_format($row_prd['price_new']) ?>
                                         </p>
                                     <?php } ?>
                                 </div>

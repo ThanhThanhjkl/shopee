@@ -155,7 +155,8 @@
 }
 .infomations_detail {
     font-size: 13px;
-    color: #737373;
+    color: #737373 !important;
+    text-decoration: none !important;
 }
 .transport_detail {
     font-size: 13px;
