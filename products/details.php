@@ -13,9 +13,10 @@ if (isset($_POST['submit'])) {
     $amount = $_POST['amount'];
     $prd_name = $row['prd_name'];
     $price_new = $row['price_new'];
+    $order_time = date("Y-m-d H:i:s");
 
-    $sql_post = "INSERT INTO address_client (name, phone_number, address, amount, prd_name )
-    VALUES ('$name', '$phone_number', '$address', $amount, '$prd_name')";
+    $sql_post = "INSERT INTO address_client (name, phone_number, address, amount, prd_name, order_time )
+    VALUES ('$name', '$phone_number', '$address', $amount, '$prd_name', '$order_time')";
     $query_post = mysqli_query($connect, $sql_post);
     echo "<script>document.write(localStorage.setItem('name', '" . $name . "'))</script>";
     echo "<script>document.write(localStorage.setItem('phone_number', '" . $phone_number . "'))</script>";
@@ -409,13 +410,13 @@ if (isset($_POST['submit'])) {
                                         </div>
                                         <div class="vote second">
                                             <a class="rate black" href="">
-                                                <?php echo $row['count_voted'] ?>
+                                                <?php echo number_format($row['count_voted']) ?>
                                             </a>
                                             <p class="remake">Đánh Giá</p>
                                         </div>
                                         <div class="vote last">
                                             <a class="rate black undecoration" href="">
-                                                <?php echo $row['sold'] ?>
+                                                <?php echo number_format($row['sold']) ?>
                                             </a>
                                             <p class="remake">Đã bán</p>
                                         </div>
@@ -423,10 +424,10 @@ if (isset($_POST['submit'])) {
                                     <div class="price">
                                         <div class="old_price home-product-item__price">
                                             <span class="home-product-item__price-old">
-                                                <?php echo $row['price_old'] ?>đ
+                                                <?php echo number_format($row['price_old']) ?>đ
                                             </span>
                                             <span class="home-product-item__price-current">
-                                                <?php echo $row['price_new'] ?>đ
+                                                <?php echo number_format($row['price_new']) ?>đ
                                             </span>
                                         </div>
                                         <div class="sale">
@@ -498,7 +499,7 @@ if (isset($_POST['submit'])) {
                                     <div class="author">
                                         <p> Xưởng lì xì Boo Boo</p>
                                         <span>Online 10 phút trước</span>
-                                        <span><i class="fa fa-map-marker"></i>
+                                        <span><i class="fa fa-map-marked-alt"></i>
                                             <?php echo $row['addres'] ?>
                                         </span>
                                     </div>

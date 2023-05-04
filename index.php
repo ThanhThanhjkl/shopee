@@ -27,6 +27,9 @@ require_once 'config/db.php';
             case 'details':
                 require_once 'products/details.php';
                 break;
+            case 'detail_cart':
+                require_once 'products/detail_cart.php';
+                break;
             case 'cart':
                 require_once 'products/cart.php';
                 break;

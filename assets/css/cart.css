@@ -121,3 +121,47 @@
 .btn-cancel {
     background-color: #ee4d2d !important;
 }
+
+.cart_header {
+    background-color: #00bfa5;
+    padding: 20px !important;
+}
+
+.left_header {
+    color: white;
+}
+
+.left_header h3 {
+    font-size: 17px;
+}
+
+.left_header p {
+    font-size: 13px;
+}
+
+.icon_translate {
+    width: 50px;
+}
+
+.icon_infor {
+    color: #737373;
+    font-size: 13px;
+    margin-top: 10px;
+}
+.title_infor {
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
+}
+.infomations_detail {
+    font-size: 13px;
+    color: #737373;
+}
+.transport_detail {
+    font-size: 13px;
+    color: #00bfa5;
+}
+.transport_time {
+    font-size: 13px;
+    color: #737373;
+}

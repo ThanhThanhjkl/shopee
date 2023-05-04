@@ -2,6 +2,8 @@
 $id = $_GET['id'];
 $sql = "SELECT * FROM address_client where phone_number = $id";
 $query = mysqli_query($connect, $sql);
+$row = mysqli_fetch_assoc($query);
+$order_time = $row['order_time'];
 ?>
 <style>
     <?php include "./assets/css/footer.css" ?>
@@ -317,64 +319,42 @@ $query = mysqli_query($connect, $sql);
             </div>
         </header>
         <div class="app__container">
-            <?php
-            while ($row = mysqli_fetch_assoc($query)) { ?>
-                <div class="grid wide">
-                    <div class="row sm-gutter">
-                        <div class="line"></div>
-                        <div class="cart_item">
-                            <div class="container">
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex">
-                                        <p class="favorite">Yêu thích</p>
-                                        <h3 class="mt-auto mb-auto ml-3">Xưởng lì xì Boo Boo</h3>
-                                    </div>
-                                    <p class="mt-auto mb-auto status_transport">Đang giao</p>
+            <div class="grid wide">
+                <div class="row sm-gutter">
+                    <div class="line"></div>
+                    <div class="cart_item">
+                        <div class="container">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <p class="favorite">Yêu thích</p>
+                                    <h3 class="mt-auto mb-auto ml-3">Xưởng lì xì Boo Boo</h3>
                                 </div>
-                                <a class="undecoration" href="">
-                                    <div class="d-flex col-12 row1">
-                                        <?php
-                                        $prd_name = mysqli_real_escape_string($connect, $row['prd_name']);
-                                        $sql_prd = "SELECT * FROM products WHERE prd_name = ?";
-                                        $stmt_prd = mysqli_prepare($connect, $sql_prd);
-                                        mysqli_stmt_bind_param($stmt_prd, "s", $prd_name);
-                                        mysqli_stmt_execute($stmt_prd);
-                                        $result_prd = mysqli_stmt_get_result($stmt_prd);
-                                        while ($row_prd = mysqli_fetch_assoc($result_prd)) {
-                                            ?>
-                                            <img class="col-3 p-0 mr-3" src="<?php echo $row_prd['image']; ?>" width="80px"
-                                                height="80px">
-                                            <?php
-                                        }
+                                <p class="mt-auto mb-auto status_transport">Đang giao</p>
+                            </div>
+                            <a class="undecoration"
+                                href="index.php?page_layout=detail_cart&id=<?php echo $row['id'] ?>">
+                                <div class="d-flex col-12 row1">
+                                    <?php
+                                    $prd_name = mysqli_real_escape_string($connect, $row['prd_name']);
+                                    $sql_prd = "SELECT * FROM products WHERE prd_name = ?";
+                                    $stmt_prd = mysqli_prepare($connect, $sql_prd);
+                                    mysqli_stmt_bind_param($stmt_prd, "s", $prd_name);
+                                    mysqli_stmt_execute($stmt_prd);
+                                    $result_prd = mysqli_stmt_get_result($stmt_prd);
+                                    while ($row_prd = mysqli_fetch_assoc($result_prd)) {
                                         ?>
-                                        <div class="col-9 px-0">
-                                            <p class="title_cart m-0">
-                                                <?php echo $row['prd_name'] ?>
-                                            </p>
-                                            <p class="title_cart mb-0 mt-4 text-end">x
-                                                <?php echo $row['amount'] ?>
-                                            </p>
-                                            <?php
-                                            $prd_name = mysqli_real_escape_string($connect, $row['prd_name']);
-                                            $sql_prd = "SELECT * FROM products where prd_name = ?";
-                                            $stmt_prd = mysqli_prepare($connect, $sql_prd);
-                                            mysqli_stmt_bind_param($stmt_prd, "s", $prd_name);
-                                            mysqli_stmt_execute($stmt_prd);
-                                            $result_prd = mysqli_stmt_get_result($stmt_prd);
-                                            while ($row_prd = mysqli_fetch_assoc($result_prd)) { ?>
-                                                <p class="title_cart m-0 text-end">
-                                                    <?php echo $row_prd['price_new'] ?>
-                                                </p>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="d-flex total mt-3 mx-2 justify-content-between">
-                                    <p class="amount">
-                                        <?php echo $row['amount'] ?> sản phẩm
-                                    </p>
-                                    <div class="d-flex">
-                                        <p class="total_title mr-2">Thành tiền:</p>
+                                        <img class="col-3 p-0 mr-3" src="<?php echo $row_prd['image']; ?>" width="80px"
+                                            height="80px">
+                                        <?php
+                                    }
+                                    ?>
+                                    <div class="col-9 px-0">
+                                        <p class="title_cart m-0">
+                                            <?php echo $row['prd_name'] ?>
+                                        </p>
+                                        <p class="title_cart mb-0 mt-4 text-end">x
+                                            <?php echo $row['amount'] ?>
+                                        </p>
                                         <?php
                                         $prd_name = mysqli_real_escape_string($connect, $row['prd_name']);
                                         $sql_prd = "SELECT * FROM products where prd_name = ?";
@@ -383,45 +363,73 @@ $query = mysqli_query($connect, $sql);
                                         mysqli_stmt_execute($stmt_prd);
                                         $result_prd = mysqli_stmt_get_result($stmt_prd);
                                         while ($row_prd = mysqli_fetch_assoc($result_prd)) { ?>
-                                            <p class="price">
+                                            <p class="title_cart m-0 text-end">
                                                 <?php echo $row_prd['price_new'] ?>
                                             </p>
                                         <?php } ?>
                                     </div>
                                 </div>
-                                <div id="countdown-timer" class="status mt-3"></div>
-                                <div data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="text-end"><button
-                                        class="btn-cancel">Hủy đơn</button></div>
+                            </a>
+                            <div class="d-flex total mt-3 mx-2 justify-content-between">
+                                <p class="amount">
+                                    <?php echo $row['amount'] ?> sản phẩm
+                                </p>
+                                <div class="d-flex">
+                                    <p class="total_title mr-2">Thành tiền:</p>
+                                    <?php
+                                    $prd_name = mysqli_real_escape_string($connect, $row['prd_name']);
+                                    $sql_prd = "SELECT * FROM products where prd_name = ?";
+                                    $stmt_prd = mysqli_prepare($connect, $sql_prd);
+                                    mysqli_stmt_bind_param($stmt_prd, "s", $prd_name);
+                                    mysqli_stmt_execute($stmt_prd);
+                                    $result_prd = mysqli_stmt_get_result($stmt_prd);
+                                    while ($row_prd = mysqli_fetch_assoc($result_prd)) { ?>
+                                        <p class="price">
+                                            <?php echo $row_prd['price_new'] ?>
+                                        </p>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div id="countdown-timer" class="status mt-3">
+                                <?php
+                                $start_time = $order_time;
+                                $end_time = date('Y-m-d', strtotime($start_time . ' +3 days'));
+                                $remaining_time = strtotime($end_time) - time();
+                                echo "Đơn hàng đang giao đến bạn <br/> " . "Đơn hàng sẽ giao trước " . date("d/m/Y", strtotime($end_time));
 
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-detail">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <div class="col-4"></div>
-                                                <h2 class="col-4 modal-title text-center" id="staticBackdropLabel">Hủy
-                                                    Đơn</h2>
-                                                <button type="button" class="col-4 btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                ?>
+                            </div>
+                            <div data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="text-end"><button
+                                    class="btn-cancel">Hủy đơn</button></div>
+
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-detail">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="col-4"></div>
+                                            <h2 class="col-4 modal-title text-center" id="staticBackdropLabel">Hủy
+                                                Đơn</h2>
+                                            <button type="button" class="col-4 btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="descriptioned row justify-content-center">
+                                                <span class="col-9 accept">Bạn chắc chắn muốn hủy đơn hàng
+                                                    <?php echo $row['prd_name'] ?> ?
+                                                </span>
                                             </div>
-                                            <div class="modal-body">
-                                                <div class="descriptioned row justify-content-center">
-                                                    <span class="col-9 accept">Bạn chắc chắn muốn hủy đơn hàng
-                                                        <?php echo $row['prd_name'] ?> ?
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer mx-4 justify-content-between">
+                                        </div>
+                                        <div class="modal-footer mx-4 justify-content-between">
+                                            <button type="button"
+                                                class="button-axept btn-cancel btn btn-secondary btn-ok"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <a href="index.php?page_layout=delete_cart&id=<?php echo $row['id'] ?>">
                                                 <button type="button"
-                                                    class="button-axept btn-cancel btn btn-secondary btn-ok"
-                                                    data-bs-dismiss="modal">Cancel</button>
-                                                <a href="index.php?page_layout=delete_cart&id=<?php echo $row['id'] ?>">
-                                                    <button type="button"
-                                                        class="button-axept btn-sucssested btn btn-secondary btn-ok"
-                                                        data-bs-dismiss="modal">Ok</button>
-                                                </a>
-                                            </div>
+                                                    class="button-axept btn-sucssested btn btn-secondary btn-ok"
+                                                    data-bs-dismiss="modal">Ok</button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -429,7 +437,7 @@ $query = mysqli_query($connect, $sql);
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            </div>
         </div>
         <!-- Footer -->
         <footer class="footer">
@@ -466,34 +474,4 @@ $query = mysqli_query($connect, $sql);
             </div>
         </footer>
     </div>
-    <script>
-        // Set the date 3 days from now
-        const countDownDate = new Date().getTime() + (4 * 24 * 60 * 60 * 1000);
-
-        // Update the count down every 1 second
-        const timerInterval = setInterval(function () {
-
-            // Get the current date and time
-            const now = new Date().getTime();
-
-            // Calculate the distance between now and the count down date
-            const distance = countDownDate - now;
-
-            // Calculate days, hours, minutes and seconds remaining
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Display the countdown timer
-            const countdownElement = document.getElementById("countdown-timer");
-            countdownElement.innerHTML = `Đơn hàng đã được giao cho nhà vận chuyển <br> dự kiến sau ${days} ngày`;
-
-            // If the count down is finished, clear the interval and display a message
-            if (distance < 0) {
-                clearInterval(timerInterval);
-                countdownElement.innerHTML = "EXPIRED";
-            }
-        }, 1000);
-    </script>
 </body>
