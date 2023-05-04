@@ -27,6 +27,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 <style>
+    <?php include "./assets/css/footer.css" ?>
     <?php include "./assets/css/detail.css" ?>
     <?php include "./assets/css/base.css" ?>
     <?php include "./assets/css/main.css" ?>
@@ -353,12 +354,19 @@ if (isset($_POST['submit'])) {
                             <nav class="category categoryed">
                                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+                                        <li data-target="#carouselExampleIndicators"
+                                            style="background-image: url(<?php echo $row['image'] ?>);" data-slide-to="0"
+                                            class="active">
                                         </li>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                        <li data-target="#carouselExampleIndicators"
+                                            style="background-image: url(<?php echo $row['image1'] ?>);" data-slide-to="1">
+                                        </li>
+                                        <li data-target="#carouselExampleIndicators"
+                                            style="background-image: url(<?php echo $row['image2'] ?>);" data-slide-to="2">
+                                        </li>
                                     </ol>
                                     <div class="carousel-inner">
+                                        <img class="free_ship_icon" src="./assets/img/free_ship.png" alt="">
                                         <div class="carousel-item active">
                                             <img class="d-block w-100" src="<?php echo $row['image']; ?>" alt="First slide">
                                         </div>
@@ -432,10 +440,10 @@ if (isset($_POST['submit'])) {
                                             phí vận chuyển <span>Miễn Phí được trả phí bởi nhà sản xuất</span>
                                             <div class="d-flex">
                                                 <p class="col-2 mb-auto mt-auto p-0">số lượng</p>
-                                                <input id="myAmount" class="input_tranfer pt-2 pb-2 col-3 ml-2"
+                                                <input id="myAmount" class="input_tranfer pt-2 pb-2 mb-0 col-3 ml-2"
                                                     name="amount" type="text" required>
                                             </div>
-                                            <div class="d-flex flex-column mb-3">
+                                            <div class="d-flex flex-column">
                                                 <p class="col-12 mb-auto mt-auto p-0">tên người đặt hàng</p>
                                                 <input id="myName" class="input_tranfer m-0 pt-3 pb-3 col-12" name="name"
                                                     type="text" placeholder="vui lòng nhập tên" required>
@@ -461,9 +469,19 @@ if (isset($_POST['submit'])) {
                                                 </p>
                                             </div>
                                         </div>
-                                        <button name="submit" type="submit" onclick="buy()" class="btn_buy">
-                                            Mua ngay
-                                        </button>
+                                        <div class="nav_buy">
+                                            <div class="btn-left col-6 p-0">
+                                                <div class="col-6 firt_icon text-center">
+                                                    <img width="50%" src="./assets/img/icon_chat.png" alt="">
+                                                </div>
+                                                <div class="col-6 text-center">
+                                                    <img width="50%" src="./assets/img/icon_addcart.png" alt="">
+                                                </div>
+                                            </div>
+                                            <button name="submit" type="submit" onclick="buy()" class="btn_buy col-6">
+                                                Mua ngay
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
                             </nav>
@@ -615,8 +633,10 @@ if (isset($_POST['submit'])) {
                                                 <?php echo $row['cmt_content'] ?>
                                             </p>
                                             <div class="row group_images d-flex">
-                                                <img class="col-5" src="<?php echo $row['cmt_img1'] ?>" alt="">
-                                                <img class="col-5" src="<?php echo $row['cmt_img2'] ?>" alt="">
+                                                <div class="col-5 img_comments"
+                                                    style="background-image: url(<?php echo $row['cmt_img1'] ?>);"></div>
+                                                <div class="col-5 img_comments"
+                                                    style="background-image: url(<?php echo $row['cmt_img2'] ?>);"></div>
                                             </div>
                                             <span class="row justify-content-end pt-3 comment_time">02-02-2023 14:51</span>
                                         </div>
@@ -631,86 +651,28 @@ if (isset($_POST['submit'])) {
         <!-- Footer -->
         <footer class="footer">
             <div class="grid wide footer__content">
-                <div class="row">
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">CHĂM SÓC KHÁCH HÀNG</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Trung Tâm Trợ Giúp</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Hướng Dẫn Mua Hàng</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Chính Sách Vận Chuyển</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">VỀ CHÚNG TÔI</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Giới Thiệu Về Shop</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Tuyển Dụng</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Điều Khoản Shop</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">DANH MỤC</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Shopee Mall</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Hướng Dẫn Mua Hàng</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Hướng Dẫn Bán Hàng</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">THEO DÕI CHÚNG TÔI TRÊN</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">
-                                    <i class="footer-item__icon fab fa-facebook-square"></i>
-                                    Facebook</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">
-                                    <i class="footer-item__icon fab fa-instagram-square"></i>
-                                    Instagram</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">
-                                    <i class="footer-item__icon fab fa-linkedin"></i>
-                                    Linkedin</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col l-2-4 m-8 c-12">
-                        <h3 class="footer__heading">VÀO CỬA HÀNG TRÊN ỨNG DỤNG</h3>
-                        <div class="footer__download">
-                            <img src="./assets/img/qr_code.png" alt="Download QR" class="footer__dowload-qr" />
-                            <div class="footer__download-apps">
-                                <a href="#" class="footer__download-app-link">
-                                    <img src="./assets/img/google_play.png" alt="Google Play"
-                                        class="footer__download-app-img" />
-                                </a>
-                                <a href="#" class="footer__download-app-link">
-                                    <img src="./assets/img/appstore.png" alt="App store"
-                                        class="footer__download-app-img" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="footer_menu">CHÍNH SÁCH BẢO MẬT</div>
+                <div class="footer_menu last">QUY CHẾ HOẠT ĐỘNG</div>
+            </div>
+            <div class="grid wide footer__content">
+                <div class="footer_menu">CHÍNH SÁCH VẬN CHUYỂN</div>
+                <div class="footer_menu last">CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</div>
+            </div>
+            <div class="logo_bo_ct">
+                <img width="40%" src="./assets/img/bo_ct.png" alt="">
+                <img width="40%" src="./assets/img/bo_ct.png" alt="">
+            </div>
+            <div class="container">
+                <p class="infor_footer">Công ty TNHH Shopee</p>
+                <p class="infor_footer">Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc
+                    Khánh, Quận Ba Đình, Thành
+                    phố Hà Nội, Việt Nam. Tổng đài hỗ trợ: 19001221 - Email: cskh@hotro.shopee.vn</p>
+                <p class="infor_footer">Chịu Trách Nhiệm Quản Lý Nội Dung: Nguyễn Đức Trí - Điện thoại liên hệ: 024
+                    73081221
+                    (ext 4678)</p>
+                <p class="infor_footer">Mã số doanh nghiệp: 0106773786 do Sở Kế hoạch & Đầu tư TP Hà Nội cấp lần đầu
+                    ngày
+                    10/02/2015</p>
             </div>
             <div class="footer__bottom">
                 <div class="grid wide">
@@ -729,7 +691,7 @@ if (isset($_POST['submit'])) {
         let prd_name = localStorage.getItem("prd_name");
 
         let hrefed = `index.php?page_layout=cart&id=${phone_number}`
-        document.getElementById("redirected").href =hrefed;
+        document.getElementById("redirected").href = hrefed;
 
         if (address === null) {
             document.getElementById("myAddress").value = "";

@@ -4,6 +4,7 @@ $sql = "SELECT * FROM address_client where phone_number = $id";
 $query = mysqli_query($connect, $sql);
 ?>
 <style>
+    <?php include "./assets/css/footer.css" ?>
     <?php include "./assets/css/cart.css" ?>
     <?php include "./assets/css/base.css" ?>
     <?php include "./assets/css/main.css" ?>
@@ -412,7 +413,8 @@ $query = mysqli_query($connect, $sql);
                                                 </div>
                                             </div>
                                             <div class="modal-footer mx-4 justify-content-between">
-                                                <button type="button" class="button-axept btn-cancel btn btn-secondary btn-ok"
+                                                <button type="button"
+                                                    class="button-axept btn-cancel btn btn-secondary btn-ok"
                                                     data-bs-dismiss="modal">Cancel</button>
                                                 <a href="index.php?page_layout=delete_cart&id=<?php echo $row['id'] ?>">
                                                     <button type="button"
@@ -432,86 +434,28 @@ $query = mysqli_query($connect, $sql);
         <!-- Footer -->
         <footer class="footer">
             <div class="grid wide footer__content">
-                <div class="row">
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">CHĂM SÓC KHÁCH HÀNG</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Trung Tâm Trợ Giúp</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Hướng Dẫn Mua Hàng</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Chính Sách Vận Chuyển</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">VỀ CHÚNG TÔI</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Giới Thiệu Về Shop</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Tuyển Dụng</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Điều Khoản Shop</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">DANH MỤC</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Shopee Mall</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Hướng Dẫn Mua Hàng</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">Hướng Dẫn Bán Hàng</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col l-2-4 m-4 c-6">
-                        <h3 class="footer__heading">THEO DÕI CHÚNG TÔI TRÊN</h3>
-                        <ul class="footer-list">
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">
-                                    <i class="footer-item__icon fab fa-facebook-square"></i>
-                                    Facebook</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">
-                                    <i class="footer-item__icon fab fa-instagram-square"></i>
-                                    Instagram</a>
-                            </li>
-                            <li class="footer-item">
-                                <a href="#" class="footer-item__link">
-                                    <i class="footer-item__icon fab fa-linkedin"></i>
-                                    Linkedin</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col l-2-4 m-8 c-12">
-                        <h3 class="footer__heading">VÀO CỬA HÀNG TRÊN ỨNG DỤNG</h3>
-                        <div class="footer__download">
-                            <img src="./assets/img/qr_code.png" alt="Download QR" class="footer__dowload-qr" />
-                            <div class="footer__download-apps">
-                                <a href="#" class="footer__download-app-link">
-                                    <img src="./assets/img/google_play.png" alt="Google Play"
-                                        class="footer__download-app-img" />
-                                </a>
-                                <a href="#" class="footer__download-app-link">
-                                    <img src="./assets/img/appstore.png" alt="App store"
-                                        class="footer__download-app-img" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="footer_menu">CHÍNH SÁCH BẢO MẬT</div>
+                <div class="footer_menu last">QUY CHẾ HOẠT ĐỘNG</div>
+            </div>
+            <div class="grid wide footer__content">
+                <div class="footer_menu">CHÍNH SÁCH VẬN CHUYỂN</div>
+                <div class="footer_menu last">CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</div>
+            </div>
+            <div class="logo_bo_ct">
+                <img width="40%" src="./assets/img/bo_ct.png" alt="">
+                <img width="40%" src="./assets/img/bo_ct.png" alt="">
+            </div>
+            <div class="container">
+                <p class="infor_footer">Công ty TNHH Shopee</p>
+                <p class="infor_footer">Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc
+                    Khánh, Quận Ba Đình, Thành
+                    phố Hà Nội, Việt Nam. Tổng đài hỗ trợ: 19001221 - Email: cskh@hotro.shopee.vn</p>
+                <p class="infor_footer">Chịu Trách Nhiệm Quản Lý Nội Dung: Nguyễn Đức Trí - Điện thoại liên hệ: 024
+                    73081221
+                    (ext 4678)</p>
+                <p class="infor_footer">Mã số doanh nghiệp: 0106773786 do Sở Kế hoạch & Đầu tư TP Hà Nội cấp lần đầu
+                    ngày
+                    10/02/2015</p>
             </div>
             <div class="footer__bottom">
                 <div class="grid wide">
