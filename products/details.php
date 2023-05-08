@@ -13,6 +13,7 @@ if (isset($_POST['submit'])) {
     $amount = $_POST['amount'];
     $prd_name = $row['prd_name'];
     $price_new = $row['price_new'];
+    $totall_price = $price_new * $amount;
     $order_time = date("Y-m-d H:i:s");
 
     $sql_post = "INSERT INTO address_client (name, phone_number, address, amount, prd_name, order_time )
@@ -23,7 +24,7 @@ if (isset($_POST['submit'])) {
     echo "<script>document.write(localStorage.setItem('address', '" . $address . "'))</script>";
     echo "<script>document.write(localStorage.setItem('amount', '" . $amount . "'))</script>";
     echo "<script>document.write(localStorage.setItem('price', '" . $price_new . "'))</script>";
-    echo "<script>document.write(localStorage.setItem('prd_name', '" . $prd_name . "'));  window.location = 'index.php?page_layout=payment&id=$price_new';</script>";
+    echo "<script>document.write(localStorage.setItem('prd_name', '" . $prd_name . "'));  window.location = 'index.php?page_layout=payment&id=$totall_price';</script>";
 }
 ?>
 
