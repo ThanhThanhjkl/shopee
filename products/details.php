@@ -635,12 +635,19 @@ if (isset($_POST['submit'])) {
                                                 <?php echo $row['cmt_content'] ?>
                                             </p>
                                             <div class="row group_images d-flex">
-                                                <div class="col-5 img_comments"
-                                                    style="background-image: url(<?php echo $row['cmt_img1'] ?>);"></div>
-                                                <div class="col-5 img_comments"
-                                                    style="background-image: url(<?php echo $row['cmt_img2'] ?>);"></div>
+                                                <?php if (!empty($row['cmt_img1'])) { ?>
+                                                    <div class="col-5 img_comments"
+                                                        style="background-image: url(<?php echo $row['cmt_img1'] ?>);"></div>
+                                                <?php } else { ?>
+                                                <?php } ?>
+
+                                                <?php if (!empty($row['cmt_img2'])) { ?>
+                                                    <div class="col-5 img_comments"
+                                                        style="background-image: url(<?php echo $row['cmt_img2'] ?>);"></div>
+                                                <?php } else { ?>
+                                                <?php } ?>
                                             </div>
-                                            <span class="row justify-content-end pt-3 comment_time">02-02-2023 14:51</span>
+                                            <span class="row justify-content-end pt-3 comment_time">05-2023</span>
                                         </div>
                                     </div>
                                 <?php } ?>

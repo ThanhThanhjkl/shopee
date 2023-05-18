@@ -388,7 +388,7 @@ $order_time = $row['order_time'];
                                         $result_prd = mysqli_stmt_get_result($stmt_prd);
                                         while ($row_prd = mysqli_fetch_assoc($result_prd)) { ?>
                                             <p class="price">
-                                                đ<?php echo number_format($row_prd['price_new']) ?>
+                                                đ <?php echo number_format($row_prd['price_new'] * $row['amount']); ?>
                                             </p>
                                         <?php } ?>
                                     </div>
